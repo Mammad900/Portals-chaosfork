@@ -30,7 +30,7 @@ end
 
 --get the portal this one is connected to
 local function get_opposite_portal(entity)
-  for _, v in pairs(global.portals) do
+  for _, v in pairs(storage.portals) do
     if v.b and v.b == entity then
       if v.a and v.a.valid then return v.a end
     elseif v.a and v.a == entity then
@@ -41,14 +41,14 @@ end
 
 --get a portal if you know which one you want and who owns it
 local function get_players_portal(player_index, portal_type) -- example: 1, "a"   --DOES NOT CHECK .VALID!!!
-  return global.portals[player_index] and global.portals[player_index][portal_type] or nil
+  return storage.portals[player_index] and storage.portals[player_index][portal_type] or nil
 end
 
--- destroy the portal and remove it from the global table
+-- destroy the portal and remove it from the storage table
 local function destroy_portal(player_index, portal_type, portal)
   portal.destroy()
-  if global.portals[player_index] and global.portals[player_index][portal_type] then
-    global.portals[player_index][portal_type] = nil -- remove the portal from the list
+  if storage.portals[player_index] and storage.portals[player_index][portal_type] then
+    storage.portals[player_index][portal_type] = nil -- remove the portal from the list
   end
 end
 
@@ -65,17 +65,17 @@ end
 
 --gets the player_index of the owner of the portal
 local function get_portals_owner(entity)
-  for player_index, tbl in pairs(global.portals) do
+  for player_index, tbl in pairs(storage.portals) do
     if (tbl.a and tbl.a == entity) or (tbl.b and tbl.b == entity) then
       return player_index
     end
   end
 end
 
---save the portal in the global table
+--save the portal in the storage table
 local function save_portal(player_index, portal_type, entity)
-  global.portals[player_index] = global.portals[player_index] or {}
-  global.portals[player_index][portal_type] = entity
+  storage.portals[player_index] = storage.portals[player_index] or {}
+  storage.portals[player_index][portal_type] = entity
 end
 
 
@@ -110,18 +110,18 @@ end
 --Creates portal-b when portal is ghost-placed, creates portal-a when portal is normally placed.
 -- Note: I dont react to on_built_entity with portal-a and portal-b because this can only happen in the entity editor map editor (there is no item to place them normally). For now, I don't think I need to handle the entity editor map editor.
 script.on_event(defines.events.on_built_entity, function(event)
-  if event.created_entity.type == "entity-ghost" then --portal ghost-placed
-    local new_position = event.created_entity.position
-    local new_surface = event.created_entity.surface
+  if event.entity.type == "entity-ghost" then --portal ghost-placed
+    local new_position = event.entity.position
+    local new_surface = event.entity.surface
     local player = game.get_player(event.player_index)
-    event.created_entity.destroy() --destroy portal which is just a placeholder entity
+    event.entity.destroy() --destroy portal which is just a placeholder entity
     
-    if not event.stack.valid_for_read and player.cursor_ghost and player.cursor_ghost.name == "portal-gun" then -- player used ghost cursor
-      build_error({"cant-use-ghost-cursor-for-portal"}, player, new_position)
-      return
-    end
+    -- if not event.stack.valid_for_read and player.cursor_ghost and player.cursor_ghost.name == "portal-gun" then -- player used ghost cursor
+      -- build_error({"cant-use-ghost-cursor-for-portal"}, player, new_position)
+      -- return
+    -- end
     
-    if global.disable_long_distance_placing or settings.global["portals-disable-long-distance-placing"].value then
+    if storage.disable_long_distance_placing or settings.global["portals-disable-long-distance-placing"].value then
       local max_dist = player.build_distance
       local X = new_position.x
       local Y = new_position.y
@@ -139,11 +139,11 @@ script.on_event(defines.events.on_built_entity, function(event)
     end
     
   else --portal normally placed
-    local new_position = event.created_entity.position
-    local new_surface = event.created_entity.surface
+    local new_position = event.entity.position
+    local new_surface = event.entity.surface
     local player = game.get_player(event.player_index)
     
-    event.created_entity.destroy() --destroy portal which is just a placeholder entity
+    event.entity.destroy() --destroy portal which is just a placeholder entity
     if player.cursor_stack then 
       player.cursor_stack.set_stack{name="portal-gun", count = 1} --make player hold one portal gun, does not care if player already holds portal guns
     end
@@ -213,11 +213,11 @@ local function try_teleport(player, exit_portal, entrance_portal)
   local tick = game.tick
   local player_index = player.index
   if exit_portal then
-    if (not global.teleport_delay[player_index]) or global.teleport_delay[player_index] < tick then
+    if (not storage.teleport_delay[player_index]) or storage.teleport_delay[player_index] < tick then
       player.surface.play_sound({path="portal-enter", position=player.position})
       player.teleport({exit_portal.position.x, exit_portal.position.y-0.9}, exit_portal.surface) --teleport player to the top of the exit_portal entity
       exit_portal.surface.play_sound({path="portal-exit", position=exit_portal.position})
-      global.teleport_delay[player_index] = tick + 47
+      storage.teleport_delay[player_index] = tick + 47
       script.raise_event(on_player_teleported_event, {player_index = player_index, entrance_portal = entrance_portal, target_portal = exit_portal})
     end
   end
@@ -239,9 +239,9 @@ end)
 -- INIT --
 --Makes lists of portals on init
 script.on_init(function()
-  global.portals = {} --list[player_index] = {a = LuaEntity, b = LuaEntity}
-  global.teleport_delay = {} --list[player_index] = game.tick + 47
-  global.disable_long_distance_placing = false
+  storage.portals = {} --list[player_index] = {a = LuaEntity, b = LuaEntity}
+  storage.teleport_delay = {} --list[player_index] = game.tick + 47
+  storage.disable_long_distance_placing = false
 end)
 
 script.on_configuration_changed(function(event)  
@@ -293,7 +293,7 @@ remote.add_interface("portals",
     -- entity: LuaEntity, the portal to destroy
     -- note that this does not check if the selected entity is a portal, however you should only supply portals here.
     
-  disable_long_distance_placing = function(bool) global.disable_long_distance_placing = bool end
+  disable_long_distance_placing = function(bool) storage.disable_long_distance_placing = bool end
     -- whether the blue portal can be placed from a long distance. If this is true the player can never place from a long distance, if it is false, the player can place from a long distance depending on the mod option
   
   -- some examples --

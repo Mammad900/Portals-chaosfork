@@ -15,7 +15,8 @@ data:extend(
       scale = 0.5,
     },
     collision_box = {{0, -0.6}, {0, 0.6}},
-    collision_mask = { "item-layer", "object-layer", "water-tile"},
+    -- collision_mask = { "item-layer", "object-layer", "water-tile"},
+	collision_mask = {layers = {item = true, meltable = true, object = true, water_tile = true, is_object = true, is_lower_object = true}},
     selection_box = {{-0.5, -0.9}, {0.5, 0.9}},
     tile_width = 1,
     tile_height = 2,
@@ -30,7 +31,8 @@ data:extend(
     minable = {mining_time = 0.7},
     max_health = 20,
     collision_box = {{0, -0.6}, {0, 0.6}},
-    collision_mask = { "item-layer", "object-layer", "water-tile"},
+    -- collision_mask = { "item-layer", "object-layer", "water-tile"},
+	collision_mask = {layers = {item = true, meltable = true, object = true, water_tile = true, is_object = true, is_lower_object = true}},
     selection_box = {{-0.5, -0.9}, {0.5, 0.9}},
     random_animation_offset = false,
     animations =
@@ -63,7 +65,8 @@ data:extend(
     minable = {mining_time = 0.7},
     max_health = 20,
     collision_box = {{0, -0.6}, {0, 0.6}},
-    collision_mask = { "item-layer", "object-layer", "water-tile"},
+    -- collision_mask = { "item-layer", "object-layer", "water-tile"},
+	collision_mask = {layers = {item = true, meltable = true, object = true, water_tile = true, is_object = true, is_lower_object = true}},
     selection_box = {{-0.5, -0.9}, {0.5, 0.9}},
     random_animation_offset = false,
     animations =
@@ -268,29 +271,33 @@ data:extend(
   {
     type = "recipe",
     name = "portal-gun",
-    enabled = "false",
+    enabled = false,
     energy_required = 0.5,
     ingredients =
     {
-      {"steel-plate", 5},
-      {"advanced-circuit",10},
-      {"iron-gear-wheel", 10},
-      {"solar-panel-equipment", 1},
+      {type="item", name="steel-plate", amount=5},
+      {type="item", name="advanced-circuit",amount=10},
+      {type="item", name="iron-gear-wheel", amount=10},
+      {type="item", name="solar-panel-equipment", amount=1},
     },
-    result = "portal-gun",
+    results = {
+	{type="item", name="portal-gun", amount=1}
+	},
   },
   {
     type = "recipe",
     name = "lemon-grenade",
-    enabled = "false",
+    enabled = false,
     energy_required = 2,
     ingredients =
     {
-      {"steel-plate", 5},
-      {"sulfur",4},
-      {"flamethrower-ammo", 1},
+      {type="item", name="steel-plate", amount=5},
+      {type="item", name="sulfur", amount=4},
+      {type="item", name="flamethrower-ammo", amount=1},
     },
-    result = "lemon-grenade",
+    results = {
+	{type="item", name="lemon-grenade", amount=1}
+	},
   },
 
 
