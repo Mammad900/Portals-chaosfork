@@ -8,7 +8,7 @@ data:extend(
     minable = {mining_time = 5},
     picture =
     {
-      filename = "__Portals__/graphics/entity_portal.png",
+      filename = "__Portals-chaosfork__/graphics/entity_portal.png",
       priority = "high",
       width = 76,
       height = 128,
@@ -37,7 +37,7 @@ data:extend(
     random_animation_offset = false,
     animations =
     {
-      filename = "__Portals__/graphics/entity_portal-a.png",
+      filename = "__Portals-chaosfork__/graphics/entity_portal-a.png",
       priority = "high",
       width = 76,
       height = 128,
@@ -48,7 +48,7 @@ data:extend(
     },
     working_sound =
     {
-      sound = { filename = "__Portals__/sounds/portal_ambient_loop1.ogg" },
+      sound = { filename = "__Portals-chaosfork__/sounds/portal_ambient_loop1.ogg" },
       audible_distance_modifier = 0.4
     },
     render_layer = "floor",
@@ -71,7 +71,7 @@ data:extend(
     random_animation_offset = false,
     animations =
     {
-      filename = "__Portals__/graphics/entity_portal-b.png",
+      filename = "__Portals-chaosfork__/graphics/entity_portal-b.png",
       priority = "high",
       width = 76,
       height = 128,
@@ -82,7 +82,7 @@ data:extend(
     },
     working_sound =
     {
-      sound = { filename = "__Portals__/sounds/portal_ambient_loop1.ogg" },
+      sound = { filename = "__Portals-chaosfork__/sounds/portal_ambient_loop1.ogg" },
       audible_distance_modifier = 0.4
     },
     render_layer = "floor",
@@ -148,7 +148,7 @@ data:extend(
     light = {intensity = 0.5, size = 4},
     animation =
     {
-      filename = "__Portals__/graphics/lemon-grenade-small.png",
+      filename = "__Portals-chaosfork__/graphics/lemon-grenade-small.png",
       frame_count = 1,
       width = 24,
       height = 24,
@@ -218,7 +218,7 @@ data:extend(
     light = {intensity = 0.5, size = 4},
     animation =
     {
-      filename = "__Portals__/graphics/lemon-grenade-small.png",
+      filename = "__Portals-chaosfork__/graphics/lemon-grenade-small.png",
       frame_count = 1,
       width = 24,
       height = 24,
@@ -241,25 +241,25 @@ data:extend(
   {
     type = "sound",
     name = "portal-enter",
-    filename = "__Portals__/sounds/portal_enter.ogg",
+    filename = "__Portals-chaosfork__/sounds/portal_enter.ogg",
     volume = 0.42
   },
   {
     type = "sound",
     name = "portal-exit",
-    filename = "__Portals__/sounds/portal_exit.ogg",
+    filename = "__Portals-chaosfork__/sounds/portal_exit.ogg",
     volume = 0.42
   },
   {
     type = "sound",
     name = "portalgun-shoot-a",
-    filename = "__Portals__/sounds/portalgun_shoot_red1.ogg",
+    filename = "__Portals-chaosfork__/sounds/portalgun_shoot_red1.ogg",
     volume = 0.5
   },
   {
     type = "sound",
     name = "portalgun-shoot-b",
-    filename = "__Portals__/sounds/portalgun_shoot_blue1.ogg",
+    filename = "__Portals-chaosfork__/sounds/portalgun_shoot_blue1.ogg",
     volume = 0.5
   }
 })
@@ -306,7 +306,7 @@ data:extend(
     type = "item",
     name = "portal-gun",
     subgroup = "transport",
-    icon = "__Portals__/graphics/portal-gun.png",
+    icon = "__Portals-chaosfork__/graphics/portal-gun.png",
     icon_size = 32,
     order = "a",
     place_result="portal",
@@ -315,7 +315,7 @@ data:extend(
   {
     type = "capsule",
     name = "lemon-grenade",
-    icon = "__Portals__/graphics/lemon-grenade.png",
+    icon = "__Portals-chaosfork__/graphics/lemon-grenade.png",
     icon_size = 32,
     capsule_action =
     {
@@ -353,7 +353,7 @@ data:extend(
   {
     type = "technology",
     name = "portals",
-    icon = "__Portals__/graphics/portal-tech.png",
+    icon = "__Portals-chaosfork__/graphics/portal-tech.png",
     icon_size = 64,
     effects =
     {
@@ -378,7 +378,7 @@ data:extend(
   {
     type = "technology",
     name = "lemon-grenade",
-    icon = "__Portals__/graphics/lemon-grenade-tech.png",
+    icon = "__Portals-chaosfork__/graphics/lemon-grenade-tech.png",
     icon_size = 128,
     effects =
     {

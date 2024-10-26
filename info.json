@@ -1,11 +1,11 @@
 {
-  "name": "Portals",
+  "name": "Portals-chaosfork",
   "version": "0.7.2",
   "factorio_version" : "2.0",
-  "title": "Portals",
-  "author": "Bilka",
+  "title": "Portals chaosfork",
+  "author": "Bilka, chaosstorm115",
   "homepage": "https://forums.factorio.com/viewtopic.php?f=93&t=44305",
-  "description": "Adds combustible lemons, a portal gun and portals. Each player has their own set of portals that can be used by all players.",
+  "description": "(Kinda) Ported to 2.0! Adds combustible lemons, a portal gun and portals. Each player has their own set of portals that can be used by all players.",
   "package":
   { 
     "scripts":
