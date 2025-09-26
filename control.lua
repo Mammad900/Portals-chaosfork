@@ -226,7 +226,7 @@ end
 --tries to teleport when player connected, has character, not in vehicle:
 script.on_nth_tick(2, function()
   for _, player in pairs(game.connected_players) do
-    if player.character and not player.vehicle then
+    if player.character and player.controller_type ~= defines.controllers.remote and not player.vehicle then
       local portal = on_portal(player)
       if portal then
         try_teleport(player, get_opposite_portal(portal), portal)
